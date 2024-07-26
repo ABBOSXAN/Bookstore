@@ -142,10 +142,15 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # parolni tiklash uchun consolga havola yuboradi
 
+ACCOUNT_EMAIL_REQUIRED = True # SIGN UP da email so'raydi
+ACCOUNT_USERNAME_REQUIRED = False # lekin username so'ramaydi, bu method usernameni o'chirib qo'yadi
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # loginda email kiritishni so'raydi
+ACCOUNT_UNIQUE_EMAIL = True
 
-ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_SESSION_REMEMBER = True # signup dagi remember me ni o'chirib qo'yadi
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # parolni takrorlashni o'chirib qo'yadi
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 

@@ -13,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Bookstore</a>
+    <a class="navbar-brand" href="{% url 'home' %}">Bookstore</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -24,25 +24,25 @@
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'account_logout' %}">Log Out</a>
         </li>
         {% else %}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Log In</a>
+          <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Link
-          </a>
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            Link-->
+<!--          </a>-->
 <!--          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">-->
 <!--            <li><a class="dropdown-item" href="#">Action</a></li>-->
 <!--            <li><a class="dropdown-item" href="#">Another action</a></li>-->
 <!--            <li><hr class="dropdown-divider"></li>-->
 <!--            <li><a class="dropdown-item" href="#">Something else here</a></li>-->
 <!--          </ul>-->
-        </li>
+<!--        </li>-->
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'signup' %}" >Sign Up</a>
+          <a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a>
         </li>
         {% endif %}
       </ul>

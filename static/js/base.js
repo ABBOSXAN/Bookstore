@@ -1,1 +1,1 @@
-alert("Xush kelibsiz!")
+

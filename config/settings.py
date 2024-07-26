@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    'crispy_bootstrap5',
     # local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
@@ -124,6 +126,10 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 STATIC_ROOT = BASE_DIR/'staticfiles'
 STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
 
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+CRISPY_ALLOWED_TEMPLATE_PACK = 'bootstrap5'
+
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # Default primary key field type
@@ -131,5 +137,6 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Login and Logout
 LOGIN_REDIRECT_URL='home'
 LOGOUT_REDIRECT_URL='home'

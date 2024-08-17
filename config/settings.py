@@ -16,7 +16,7 @@ from environs import Env
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env=Env()
+env = Env()
 env.read_env()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -28,7 +28,6 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = env.bool('DJANGO_DEBUG')
 
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -65,7 +64,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,22 +79,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default':{
-        'ENGINE': env.str('DB_ENGINE', 'django.db.backends.postgresql'),
-        'NAME': env.str('DB_NAME', 'my_django_app'),
-        'USER': env.str('DB_USER', 'myuser'),
-        'PASSWORD': env.str('DB_PASSWORD', 'mypassword'),
-        'HOST': env.str('DB_HOST', 'localhost'),
-        'PORT': env.int('DB_PORT', 5432),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bookstore',
+        'USER': 'xan',
+        'PASSWORD': '010700',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -114,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -126,14 +121,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR/'static']
-STATIC_ROOT = BASE_DIR/'staticfiles'
-STATICFILES_STORAGE='django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -147,15 +141,15 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' # parolni tiklash uchun consolga havola yuboradi
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # parolni tiklash uchun consolga havola yuboradi
 
-ACCOUNT_EMAIL_REQUIRED = True # SIGN UP da email so'raydi
-ACCOUNT_USERNAME_REQUIRED = False # lekin username so'ramaydi, bu method usernameni o'chirib qo'yadi
-ACCOUNT_AUTHENTICATION_METHOD = 'email' # loginda email kiritishni so'raydi
+ACCOUNT_EMAIL_REQUIRED = True  # SIGN UP da email so'raydi
+ACCOUNT_USERNAME_REQUIRED = False  # lekin username so'ramaydi, bu method usernameni o'chirib qo'yadi
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  # loginda email kiritishni so'raydi
 ACCOUNT_UNIQUE_EMAIL = True
 
-ACCOUNT_SESSION_REMEMBER = True # signup dagi remember me ni o'chirib qo'yadi
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False # parolni takrorlashni o'chirib qo'yadi
+ACCOUNT_SESSION_REMEMBER = True  # signup dagi remember me ni o'chirib qo'yadi
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # parolni takrorlashni o'chirib qo'yadi
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
@@ -163,4 +157,3 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

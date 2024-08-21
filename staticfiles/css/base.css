@@ -1,7 +1,12 @@
+body{
+    min-height:100px;
+    padding-top: 5px;
+}
+
 h1{
     color: #0e7995;
 }
-.book1{
-    height: 300px;
+img.book1{
+    height: 400px;
     width: auto;
 }

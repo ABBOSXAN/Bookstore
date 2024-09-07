@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 ]
 
 MIDDLEWARE = [
@@ -159,4 +160,4 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEFAULT_FROM_EMAIL='absalomov.xan@gmail.com'
+DEFAULT_FROM_EMAIL = 'absalomov.xan@gmail.com'

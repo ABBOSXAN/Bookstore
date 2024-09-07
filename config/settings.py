@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     # installed apps
     'crispy_forms',
     'crispy_bootstrap5',
@@ -85,9 +86,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookshop',
+        'NAME': 'bookstore',
         'USER': 'xan',
-        'PASSWORD': '010700',
+        'PASSWORD': '0107',
         'HOST': 'localhost',
         'PORT': '5432',
     }

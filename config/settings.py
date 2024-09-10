@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import socket
 from pathlib import Path
 from environs import Env
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +26,11 @@ env.read_env()
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env.bool('DJANGO_DEBUG')
-
+DEBUG=True
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+
+hostname, _, ips=socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS=[ip[-1]+"1" for ip in ips]
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'allauth',
     'allauth.account',
+    'debug_toolbar',
     # local
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
@@ -59,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'

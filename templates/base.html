@@ -20,6 +20,8 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
+              <a class="nav-link" href="{% url 'book_list' %}">Books</a>
+          </li><li class="nav-item">
               <a class="nav-link" href="{% url 'about' %}">About</a>
           </li>
           {% if user.is_authenticated %}
@@ -46,6 +48,10 @@
         </li>
         {% endif %}
       </ul>
+      <form class="d-flex" action="{% url 'search_results' %}" method="get">
+          <input class="form-control me-2" type="search" name="q" placeholder="🔍 Search" aria-label="Search">
+          <button class="btn btn-outline-info" type="submit">Search</button>
+      </form>
     </div>
   </div>
 </nav>

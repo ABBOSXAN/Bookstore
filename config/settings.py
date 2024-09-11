@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import socket
-from pathlib import Path
 from environs import Env
+from pathlib import Path
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,11 +23,23 @@ env.read_env()
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('DJANGO_SECRET_KEY')
+SECRET_KEY = env.str('DJANGO_SECRET_KEY')
+
+SECURE_SSL_REDIRECT=env.bool("DJANGO_SECURE_SSL_REDIRECT", default=True)
+SECURE_PROXY_SSL_HEADER=("HTTP_X_FORWARDED_PROTO", 'https')
+
+SECURE_HSTS_SECONDS=env.int("DJANGO_SECURE_HSTS_SECONDS", default=2592000)
+SECURE_HSTS_INCLUDE_SUBDOMAINS=env.bool("DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True)
+SECURE_HSTS_PRELOAD=env.bool("DJANGO_SECURE_HSTS_PRELOAD", default=True)
+
+SESSION_COOKIE_SECURE=env.bool("DJANGO_SESSION_COOKIE_SECURE", default=True)
+CSRF_COOKIE_SECURE=env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG=True
+DEBUG=env.bool("DJANGO_DEBUG", default=False)
+
 ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+
 
 hostname, _, ips=socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS=[ip[-1]+"1" for ip in ips]
@@ -40,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # installed apps
@@ -56,6 +69,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,7 +78,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+
+CACHE_MIDDLEWARE_ALIAS='default'
+CACHE_MIDDLEWARE_SECONDS=604800
+CACHE_MIDDLEWARE_KEY_PREFIX=''
 
 ROOT_URLCONF = 'config.urls'
 
@@ -134,7 +153,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"

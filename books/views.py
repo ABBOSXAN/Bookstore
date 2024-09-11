@@ -1,7 +1,11 @@
+from datetime import timezone, datetime, date
+
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
 from .models import Book
+from django.urls import reverse_lazy
+
 
 
 # Create your views here.
@@ -12,6 +16,11 @@ class BookListView(LoginRequiredMixin, ListView):
     template_name = 'books/book_list.html'
     login_url = 'account_login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['current_time'] = datetime.now()
+        return context
+
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Book
@@ -21,6 +30,8 @@ class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     permission_required = 'books.special_status'
     queryset = Book.objects.all().prefetch_related('reviews__author',)
 
+
+
 class SearchResultsListView(ListView):
     model = Book
     template_name = 'books/search_results.html'
@@ -29,3 +40,6 @@ class SearchResultsListView(ListView):
         query=self.request.GET.get('q')
         return Book.objects.filter(
             Q(title__icontains=query) | Q(title__icontains=query))
+
+
+

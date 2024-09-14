@@ -1,8 +1,10 @@
-from datetime import timezone, datetime, date
+from datetime import timezone, datetime, date, time
 
+from django.db import models
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
+
 from .models import Book
 from django.urls import reverse_lazy
 
@@ -18,7 +20,7 @@ class BookListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_time'] = datetime.now()
+        context['current_time'] = datetime.date()
         return context
 
 

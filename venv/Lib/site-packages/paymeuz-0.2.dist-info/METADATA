@@ -1,0 +1,73 @@
+Metadata-Version: 2.1
+Name: paymeuz
+Version: 0.2
+Summary: paymeuz
+Home-page: https://github.com/rajab-murod/paymeuz
+Author: rajab-murod
+Author-email: rajab.murod1995@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Requires-Python: >=3.5
+Description-Content-Type: text/markdown
+Requires-Dist: requests
+Requires-Dist: django
+Requires-Dist: djangorestframework
+
+![dj_logo](https://i.pinimg.com/originals/73/b8/f2/73b8f2cac59ab9fb4078241808fbb507.jpg)
+## Introduction
+
+this package helps to integrate [payme.uz](http://payme.uz) and your application is built on [django](https://www.djangoproject.com/).
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install.
+
+```bash
+pip install requests
+pip install djangorestframework
+pip install paymeuz
+```
+
+## Usage
+
+```python
+# settings.py
+
+INSTALLED_APPS = [
+     ... 
+    'paymeuz',
+    'rest_framework',
+     ...
+]
+
+PAYME_SETTINGS = {
+    'DEBUG':True,   #True - test, False - production
+    'ID':'',  
+    'SECRET_KEY':'',
+    'ACCOUNTS':{
+        'KEY_1':'order_id',
+        'KEY_2':'',
+    }
+}
+
+# urls.py
+
+urlpatterns = [
+    ...
+    path('api/payme/',include('paymeuz.urls'))
+]
+```
+
+## Get started
+```bash
+python manage.py migrate
+python manage.py runserver
+```
+
+## Documentation
+ - payme.uz [docs](https://help.paycom.uz/ru/metody-subscribe-api)
+ - django-rest-framework [docs](https://www.django-rest-framework.org/)
+
+

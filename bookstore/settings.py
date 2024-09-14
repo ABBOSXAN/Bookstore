@@ -37,7 +37,7 @@ CSRF_COOKIE_SECURE = env.bool("DJANGO_CSRF_COOKIE_SECURE", default=True)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
-ALLOWED_HOSTS = ['Bookshop.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['bookstore.onrender.com', 'localhost', '127.0.0.1']
 
 hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
 INTERNAL_IPS = [ip[-1] + "1" for ip in ips]

@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'allauth.account',
     'debug_toolbar',
     # local
-    'bookstore',
     'accounts.apps.AccountsConfig',
     'pages.apps.PagesConfig',
     'books.apps.BooksConfig',

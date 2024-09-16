@@ -1,12 +1,9 @@
 from datetime import timezone, datetime, date, time
-
 from django.db import models
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
-
 from .models import Book
-from django.urls import reverse_lazy
 
 
 

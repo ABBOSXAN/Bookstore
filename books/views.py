@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.db import models
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
-from .models import Book
+from .models import Book, Review
 
 
 
@@ -17,7 +17,7 @@ class BookListView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['current_time'] = models.DateTimeField(auto_now=True)
+        context['current_time'] = Review.created_at
         return context
 
 

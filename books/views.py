@@ -2,22 +2,24 @@ from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
-from .models import Book
+from .models import ArtBook, TextBook
 
 
 # Create your views here.
 
 class ArtBookListView(LoginRequiredMixin, ListView):
-    model = Book
+    model = ArtBook
     context_object_name = 'book_list'
     template_name = 'books/art_book_list.html'
     login_url = 'account_login'
 
+
 class TextBookListView(LoginRequiredMixin, ListView):
-    model = Book
+    model = TextBook
     context_object_name = 'book_list'
     template_name = 'books/text_book_list.html'
     login_url = 'account_login'
+
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Book
@@ -37,6 +39,3 @@ class SearchResultsListView(ListView):
         query = self.request.GET.get('q')
         return Book.objects.filter(
             Q(title__icontains=query) | Q(title__icontains=query))
-
-
-

@@ -6,7 +6,7 @@ from django.urls import reverse
 
 # Create your models here.
 
-class Book(models.Model):
+class ArtBook(models.Model):
     id = models.UUIDField(
         primary_key=True,
         db_index=True,
@@ -31,10 +31,13 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("book_detail", args=[str(self.id)])
 
+class TextBook(ArtBook):
+    def __init__(self):
+        super().__init__()
 
 class Review(models.Model):
     book = models.ForeignKey(
-        Book,
+        ArtBook, TextBook,
         on_delete=models.CASCADE,
         related_name='reviews',
     )

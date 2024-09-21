@@ -22,20 +22,20 @@ class TextBookListView(LoginRequiredMixin, ListView):
 
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    model = Book
+    model = ArtBook
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
     login_url = 'account_login'
     permission_required = 'books.special_status'
-    queryset = Book.objects.all().prefetch_related('reviews__author', )
+    queryset = ArtBook.objects.all().prefetch_related('reviews__author', )
 
 
 class SearchResultsListView(ListView):
-    model = Book
+    model = ArtBook
     template_name = 'books/search_results.html'
     context_object_name = 'book_list'
 
     def get_queryset(self):
         query = self.request.GET.get('q')
-        return Book.objects.filter(
+        return ArtBook.objects.filter(
             Q(title__icontains=query) | Q(title__icontains=query))

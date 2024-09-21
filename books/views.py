@@ -1,9 +1,8 @@
 from datetime import datetime
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.db import models
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
-from .models import Book, Review
+from .models import Book
 
 
 # Create your views here.
@@ -14,10 +13,6 @@ class BookListView(LoginRequiredMixin, ListView):
     template_name = 'books/book_list.html'
     login_url = 'account_login'
 
-    def get_context_data(self, created_at=models.DateTimeField(auto_now=True), **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['current_time'] = created_at
-        return context
 
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):

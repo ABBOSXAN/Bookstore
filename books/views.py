@@ -7,13 +7,17 @@ from .models import Book
 
 # Create your views here.
 
-class BookListView(LoginRequiredMixin, ListView):
+class ArtBookListView(LoginRequiredMixin, ListView):
     model = Book
     context_object_name = 'book_list'
-    template_name = 'books/book_list.html'
+    template_name = 'books/art_book_list.html'
     login_url = 'account_login'
 
-
+class TextBookListView(LoginRequiredMixin, ListView):
+    model = Book
+    context_object_name = 'book_list'
+    template_name = 'books/text_book_list.html'
+    login_url = 'account_login'
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Book
@@ -33,3 +37,6 @@ class SearchResultsListView(ListView):
         query = self.request.GET.get('q')
         return Book.objects.filter(
             Q(title__icontains=query) | Q(title__icontains=query))
+
+
+

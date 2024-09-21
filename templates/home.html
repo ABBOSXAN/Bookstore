@@ -7,7 +7,7 @@
     <h1>Bu bosh sahifa</h1>
     <img class="book1" src="{% static 'images/1.png' %}">
     {% if user.is_authenticated %}
-        <p>Hello, {{user.username}}, salommmmmmm</p>
+        <p style="font-size:25px; color:dark-blue">Hello, {{user.username}}</p>
     {% else %}
         <p>You are not logged in </p>
         <a href="{% url 'account_login' %}">Log In</a>

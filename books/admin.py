@@ -13,5 +13,5 @@ class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'price')
 
 
-admin.site.register(ArtBook,TextBook)
-admin.site.register(BookAdmin)
+admin.site.register(ArtBook,BookAdmin)
+admin.site.register(TextBook,BookAdmin)

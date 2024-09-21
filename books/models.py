@@ -18,7 +18,7 @@ class ArtBook(models.Model):
     cover = models.ImageField(upload_to='covers/', blank=True, null=True)
 
     class Meta:
-        indexes=[
+        indexes = [
             models.Index(fields=['id'], name='id_index'),
         ]
         permissions = [
@@ -31,13 +31,18 @@ class ArtBook(models.Model):
     def get_absolute_url(self):
         return reverse("book_detail", args=[str(self.id)])
 
-class TextBook(ArtBook):
-    def __init__(self):
-        super().__init__()
+
+class TextBook(models.Model):
+    title = models.CharField(max_length=200)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def __str__(self):
+        return self.title
+
 
 class Review(models.Model):
     book = models.ForeignKey(
-        TextBook,
+        ArtBook,
         on_delete=models.CASCADE,
         related_name='reviews',
     )

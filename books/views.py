@@ -22,7 +22,7 @@ class TextBookListView(LoginRequiredMixin, ListView):
 
 
 class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    model = ArtBook
+    model = ArtBook, TextBook
     context_object_name = 'book'
     template_name = 'books/book_detail.html'
     login_url = 'account_login'

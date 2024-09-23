@@ -14,4 +14,4 @@ class BookAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ArtBook,BookAdmin)
-admin.site.register(TextBook,BookAdmin)
+admin.site.register(TextBook)

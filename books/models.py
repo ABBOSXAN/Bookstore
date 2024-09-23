@@ -33,6 +33,11 @@ class ArtBook(models.Model):
 
 
 class TextBook(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        db_index=True,
+        default=uuid.uuid4,
+        editable=False)
     title = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
